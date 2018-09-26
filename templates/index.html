@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+
+<body class="bg"> 
+
+    <div class="container">
+        <!-- <div class="jumbotron">
+            <h1>Mission to Mars</h1>
+            
+            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Fetch</a></p>
+        </div> -->
+        <div class="row">
+        <div class="jumbotron jumbotron-fluid col-lg-12">
+            <div class="container">
+            <h1 class="display-4">Mission to Mars!</h1>
+            <p class="lead">This is a web scraping activity pulling in information about everyone's third favorite planet, Mars..</p>
+            <hr class="my-4">
+            <p>Press the button to "rove" the internet and scrape various websites about Mars.</p>
+            <p class="lead">
+              <a class="btn btn-danger btn-md" href="/scrape" role="button">Blast Off!</a>
+            </p>
+            </div>
+          </div>
+        </div>
+        <!-- Loop through data and display -->
+        <div class="row">
+            <div class="col-xs-7 col-sm-7 col-md-7 marvin">
+                <h2 class="btn btn-info btn-lg">Latest Mars News</h2>
+                <h4>{{ marsPull.mars_news }}</h4>
+                <p>{{ marsPull.mars_news_p }}</p>
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1" width="100%">
+            </div>
+            <div class="col-xs-4 colsm-4 col-md-4 marvin">
+                <h2 class="btn btn-info btn-lg">Latest Mars Weather</h2>
+                <p>{{ marsPull.mars_weather }}</p>
+            </div>
+
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-xs-7 col-sm-7 col-md-7 marvin">
+                <h2 class="btn btn-info btn-lg">Mars Featured Image</h2>
+                <img src="{{ marsPull.mars_feat_image }}" class="viz" style="width:100%">
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1" width="100%">
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 marvin" >
+                <h2 class="btn btn-info btn-lg">Mars Facts</h2>
+                {{ marsPull.mars_facts|safe }}
+            </div>
+        </div>
+        <br>
+        <div class="row" id="mars-reports">
+        <h2 class="btn btn-info btn-lg">Mars Hemispheres</h2>
+        </div>
+        <div class="row" id="mars-reports">
+            {% for marsInfo in marsPull.mars_hemis %}
+            <div class="col-xs-6 col-sm-3">
+                <div class="card marvin" style="width: 100rem align-self=middle">
+                    <img src="{{ marsInfo.img_url }}" class="viz" style="width:100%">
+                    <div class="card-body marvin">
+                        <h5 class="card-title">{{ marsInfo.title }}</h4>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <br>
+    </div>
+    
+</body>
+</html>
